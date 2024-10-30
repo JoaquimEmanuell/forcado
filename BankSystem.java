@@ -4,23 +4,23 @@ import java.util.List;
 
 public class BankSystem {
    
-    private List<Account> accs = new ArrayList<>(); // armazena contas
+    private List<Account> accounts = new ArrayList<>(); 
 
 
-    public void addAccount(String owner, int accNum, double balance) {
+    public void addAccount(String owner, int accountNumber, double balance) {
         if (balance < 0) {
             System.out.println("Cannot add account with negative balance");
             return;
         }
-        accs.add(new Account(owner, accNum, balance));
+        accounts.add(new Account(owner, accountNumber, balance));
         System.out.println("Account added for " + owner);
     }
 
 
-    public void removeAccount(int num) {
+    public void removeAccount(int number) {
         for (int i = 0; i < accs.size(); i++) {
-            if (accs.get(i).accNum == num) {
-                accs.remove(i);
+            if (accounts.get(i).accountNumber == number) {
+                accounts.remove(i);
                 System.out.println("Account removed.");
                 return;
             }
@@ -29,10 +29,10 @@ public class BankSystem {
     }
 
 
-    public void displayAccountInfo(int num) {
-        for (Account acc : accs) {
-            if (acc.accNum == num) {
-                System.out.println("Owner: " + acc.owner + ", Balance: $" + acc.balance);
+    public void displayAccountInfo(int number) {
+        for (Account account : accounts) {
+            if (account.accountNumber == number) {
+                System.out.println("Owner: " + account.owner + ", Balance: $" + account.balance);
                 return;
             }
         }
@@ -40,15 +40,15 @@ public class BankSystem {
     }
 
 
-    public void deposit(int accNum, double amt) {
-        if (amt <= 0) {
+    public void deposit(int accountNumber double amount) {
+        if (amount <= 0) {
             System.out.println("Deposit amount must be positive.");
             return;
         }
-        for (Account acc : accs) {
-            if (acc.accNum == accNum) {
-                acc.balance += amt;
-                System.out.println("Deposited $" + amt + " to account " + accNum);
+        for (Account account : accounts) {
+            if (account.accountNumber == accountNumber) {
+                account.balance += amount;
+                System.out.println("Deposited $" + amount + " to account " + accountNumber);
                 return;
             }
         }
@@ -56,15 +56,15 @@ public class BankSystem {
     }
 
 
-    public void withdraw(int accNum, double amt) {
-        for (Account acc : accs) {
-            if (acc.accNum == accNum) {
-                if (amt > acc.balance) {
+    public void withdraw(int accountNumber, double amount) {
+        for (Account account : accounts) {
+            if (account.accountNumber == accountNumber) {
+                if (amount > account.balance) {
                     System.out.println("Insufficient funds.");
                     return;
                 }
-                acc.balance -= amt;
-                System.out.println("Withdrew $" + amt + " from account " + accNum);
+                account.balance -= amount;
+                System.out.println("Withdrew $" + amount + " from account " + accountNumber);
                 return;
             }
         }
@@ -72,54 +72,54 @@ public class BankSystem {
     }
 
 
-    public void transferFunds(int fromAccNum, int toAccNum, double amt) {
-        if (amt <= 0) {
+    public void transferFunds(int fromAccountNumber, int toAccountNumber, double amount) {
+        if (amount <= 0) {
             System.out.println("Transfer amount must be positive.");
             return;
         }
 
 
-        Account fromAcc = null;
-        Account toAcc = null;
+        Account fromAccount = null;
+        Account toAccount = null;
 
 
-        for (Account acc : accs) {
-            if (acc.accNum == fromAccNum) {
-                fromAcc = acc;
-            } else if (acc.accNum == toAccNum) {
-                toAcc = acc;
+        for (Account account : accounts) {
+            if (account.accountNumber == fromAccountNumber) {
+                fromAccount = account;
+            } else if (account.accountNumber == toAccountNumber) {
+                toAccount = account;
             }
         }
 
 
-        if (fromAcc == null || toAcc == null) {
+        if (fromAccount == null || toAccount == null) {
             System.out.println("One or both accounts not found.");
             return;
         }
 
 
-        if (fromAcc.balance < amt) {
+        if (fromAcc.balance < amount) {
             System.out.println("Insufficient funds for transfer.");
             return;
         }
 
 
-        fromAcc.balance -= amt;
-        toAcc.balance += amt;
-        System.out.println("Transferred $" + amt + " from account " + fromAccNum + " to account " + toAccNum);
+        fromAcc.balance -= amount;
+        toAcc.balance += amount;
+        System.out.println("Transferred $" + amount + " from account " + fromAccountNumber + " to account " + toAccountNumber);
     }
 
 
     public void showAllAccounts() {
-        for (Account acc : accs) {
-            System.out.println("Owner: " + acc.owner + ", Account Number: " + acc.accNum + ", Balance: $" + acc.balance);
+        for (Account account : accounts) {
+            System.out.println("Owner: " + account.owner + ", Account Number: " + account.accNum + ", Balance: $" + account.balance);
         }
     }
 
 
     public void showAccounts() {
-        for (Account acc : accs) {
-            System.out.println("Owner: " + acc.owner + ", Account Number: " + acc.accNum + ", Balance: $" + acc.balance);
+        for (Account account : accounts) {
+            System.out.println("Owner: " + account.owner + ", Account Number: " + account.accNum + ", Balance: $" + account.balance);
         }
     }
 
@@ -129,13 +129,13 @@ public class BankSystem {
     }
 
 
-    public boolean validAccountNumber(int accNum) {
-        return accNum > 0;
+    public boolean validAccountNumber(int accountNumber) {
+        return accountNumber > 0;
     }
 
 
-    public boolean validAmount(double amt) {
-        return amt > 0;
+    public boolean validAmount(double amount) {
+        return amount > 0;
     }
 
 
